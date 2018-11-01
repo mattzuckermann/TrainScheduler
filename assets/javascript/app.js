@@ -16,7 +16,6 @@ firebase.initializeApp(config);
 // =========
 
 var database = firebase.database();
-var dataArray = [];
 
 // ==============
 // EVENT LISTENER
@@ -50,43 +49,50 @@ $("#submitButton").on("click", function () {
     }
 });
 
-    // Firebase watcher + initial loader HINT: This code behaves similarly to .on("value")
-    database.ref().on("child_added", function (childSnapshot) {
+database.ref().on("child_added", function (childSnapshot) {
 
-        // Log everything that's coming out of snapshot
-        console.log(childSnapshot.val().trainName);
-        console.log(childSnapshot.val().trainDestination);
-        console.log(childSnapshot.val().trainFrequency);
-        console.log(childSnapshot.val().trainNextArrival);
-        console.log(childSnapshot.val().trainMinutesAway);
+    var trainName = childSnapshot.val().trainName;
+    var trainDestination = childSnapshot.val().trainDestination;
+    var trainFrequency = childSnapshot.val().trainFrequency;
+    var trainNextArrival = childSnapshot.val().trainNextArrival;
+    var trainMinutesAway = childSnapshot.val().trainMinutesAway;
 
-        //ADD ROW TO TABLE 
-        var tableBody = $("tbody");
-        var tableRow = $("<tr>");
-        for (i = 0; i < 5; i++) {
-            var tableData = $("<td>");
-            tableData.attr("id", "item-" + i);
-            tableRow.append(tableData);
-        }
-        //PLACE DATA
-        tableBody.append(tableRow);
-        $("#item-0").text(childSnapshot.val().trainName);
-        $("#item-1").text(childSnapshot.val().trainDestination);
-        $("#item-2").text(childSnapshot.val().trainFrequency);
-        $("#item-3").text(childSnapshot.val().trainNextArrival);
-        $("#item-4").text(childSnapshot.val().trainMinutesAway);
-        
-        // HANDLE THE ERRORS
-        function errorsHandled(errorObject) {
-            console.log("Errors handled: " + errorObject.code);
-        }
-    });
+    // Log everything that's coming out of snapshot
+    console.log(trainName);
+    console.log(trainDestination);
+    console.log(trainFrequency);
+    console.log(trainNextArrival);
+    console.log(trainMinutesAway);
 
+    //ADD ROW TO TABLE 
+    var tableBody = $("tbody");
+    var tableRow = $("<tr>").append(
+        $("<td>").text(trainName),
+        $("<td>").text(trainDestination),
+        $("<td>").text(trainFrequency),
+        $("<td>").text(trainNextArrival),
+        $("<td>").text(trainMinutesAway),
+    );
+    tableBody.append(tableRow);
 
+    // HANDLE THE ERRORS
+    function errorsHandled(errorObject) {
+        console.log("Errors handled: " + errorObject.code);
+    }
+});
 
 
 
 
+
+
+// //PLACE DATA
+        // tableBody.append(tableRow);
+        // $("#item-0").text(childSnapshot.val().trainName);
+        // $("#item-1").text(childSnapshot.val().trainDestination);
+        // $("#item-2").text(childSnapshot.val().trainFrequency);
+        // $("#item-3").text(childSnapshot.val().trainNextArrival);
+        // $("#item-4").text(childSnapshot.val().trainMinutesAway);
 
 
 
@@ -164,3 +170,14 @@ $("#submitButton").on("click", function () {
 // // Next Train
 // var nextTrain = moment().add(tMinutesTillTrain, "minutes");
 // console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+
+
+// git checkout -B [branch-name] :: to make a new branch
+// git checkout [branch name] :: to switch branches
+// git merge [branch name] :: to merge [branch name] into the current branch you're on from "git checkout"
+// git status [shows what needs to be done]
+// git push origin [branch-name] :: to 
+
+// code . in order to open up in vs code
+// cmd+k is to clear out terminal
+//lgtm "looks good to me"; used sometimes in pull requests
