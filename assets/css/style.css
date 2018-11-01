@@ -1,0 +1,20 @@
+#mainHeading {
+    padding: 20px;
+    width: 100%;
+}
+
+body {
+    background-color: #009bce;
+}
+
+th {
+    color: white;
+}
+
+td, label, .row {
+    padding: 10 0 0 0 ;
+}
+
+td, tr {
+    text-align: center;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Train Scheduler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+</head>
+
+<body>
+
+
+    <div class="container">
+        <br>
+        <h1><span class="badge badge-primary" id="mainHeading">Train Scheduler</span></h1>
+        <br>
+        <table class="table" id="dataArray">
+            <thead>
+                <tr>
+                    <th scope="col">Train Name</th>
+                    <th scope="col">Destination</th>
+                    <th scope="col">Frequency (min)</th>
+                    <th scope="col">Next Arrival</th>
+                    <th scope="col">Minutes Away</th>
+                </tr>
+            </thead>
+            <tbody>
+            
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-12">
+                <label for="inputPassword5">Train Name</label>
+                <input type="text" placeholder="Input Train Name" id="inputName" class="form-control" aria-describedby="passwordHelpBlock">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label for="inputPassword5">Destination</label>
+                <input type="text" placeholder="Input Destination" id="inputDestination" class="form-control" aria-describedby="passwordHelpBlock">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label for="inputPassword5">First Train Time (HH:mm - military time)</label>
+                <input type="text" placeholder="Input Train Time" id="inputTime" class="form-control" aria-describedby="passwordHelpBlock">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label for="inputPassword5">Frequency (min)</label>
+                <input type="text" placeholder="Input Frequency" id="inputFrequency" class="form-control" aria-describedby="passwordHelpBlock">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-12">
+                <button id="submitButton" class="btn btn-primary" type="submit">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="assets/javascript/app.js"></script>
+</body>
+
+</html>
