@@ -29,6 +29,29 @@ $("#submitButton").on("click", function () {
     var time = $("#inputTime").val().trim();
     var minutesAway = "placeholder";
 
+    //=====================================================
+    //=====================================================
+    var currentTime = moment();
+    console.log("CURRENT TIME (UNIX) " + currentTime);
+    var convertedCurrentTime = currentTime.format("hh:mm");
+    console.log("CURRENT TIME (CONVERTED): " + convertedCurrentTime);
+    console.log(currentTime.format("dddd"));
+    console.log(currentTime.format("DDD"));
+
+    var laterTime = time;
+    var laterTimeFormat = "HH:mm";
+    var convertedTime = moment(laterTime, laterTimeFormat);
+    var firebaseConvertedTime = convertedTime.format("HH:mm A")
+    console.log(firebaseConvertedTime);
+
+    console.log("");
+    console.log(convertedTime.format("X"));
+    console.log(convertedTime.format("HH:mm"));
+    console.log(convertedTime.format("hh:mm a"));
+    console.log(convertedTime.format("hh:mm A"));
+    //=====================================================
+    //=====================================================
+
     if (name === "" || destination === "" || time === "" || frequency === "") {
         alert("You need to fill in all the form information!");
     } else {
@@ -37,7 +60,7 @@ $("#submitButton").on("click", function () {
             trainName: name,
             trainDestination: destination,
             trainFrequency: frequency,
-            trainNextArrival: time,
+            trainNextArrival: firebaseConvertedTime,
             trainMinutesAway: "placeholder"
         });
 
@@ -63,6 +86,7 @@ database.ref().on("child_added", function (childSnapshot) {
     console.log(trainFrequency);
     console.log(trainNextArrival);
     console.log(trainMinutesAway);
+    console.log("--------------");
 
     //ADD ROW TO TABLE 
     var tableBody = $("tbody");
@@ -80,62 +104,6 @@ database.ref().on("child_added", function (childSnapshot) {
         console.log("Errors handled: " + errorObject.code);
     }
 });
-
-
-
-
-
-
-// //PLACE DATA
-        // tableBody.append(tableRow);
-        // $("#item-0").text(childSnapshot.val().trainName);
-        // $("#item-1").text(childSnapshot.val().trainDestination);
-        // $("#item-2").text(childSnapshot.val().trainFrequency);
-        // $("#item-3").text(childSnapshot.val().trainNextArrival);
-        // $("#item-4").text(childSnapshot.val().trainMinutesAway);
-
-
-
-
-
-
-
-
-
-
-
-    // var currentDate = moment();
-// var dateFormat = "MM/DD/YY";
-// var convertedDate = moment(currentDate, dateFormat);
-
-// =========
-// FUNCTIONS
-// =========
-
-
-// //TO PUSH WHAT'S BEEN PUT ON FROM PAST WEB VISITS
-// function displayTrains(array) {
-//     $("#displayTrains tbody").empty();
-//     for (let i in array) {
-//         $("#displayTrains").append("<tr><td>" + database.ref().get(array[i]));
-//     }
-// }
-
-
-
-// database.ref().once("value").then(function (snapshot) {
-//     console.log(snapshot.val());
-//     var snap = snapshot.val();
-
-//     for (let i in snap) {
-//         console.log(snap[i].name);
-//     }
-// });
-
-// database.ref().on("child_added", function (snapshot) {
-//     displayTrains(dataArray);
-// });
-
 
 
 
@@ -170,14 +138,3 @@ database.ref().on("child_added", function (childSnapshot) {
 // // Next Train
 // var nextTrain = moment().add(tMinutesTillTrain, "minutes");
 // console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
-
-
-// git checkout -B [branch-name] :: to make a new branch
-// git checkout [branch name] :: to switch branches
-// git merge [branch name] :: to merge [branch name] into the current branch you're on from "git checkout"
-// git status [shows what needs to be done]
-// git push origin [branch-name] :: to 
-
-// code . in order to open up in vs code
-// cmd+k is to clear out terminal
-//lgtm "looks good to me"; used sometimes in pull requests
