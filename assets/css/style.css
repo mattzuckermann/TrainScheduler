@@ -18,3 +18,8 @@ td, label, .row {
 td, tr {
     text-align: center;
 }
+
+#emptyErrorDiv {
+    display: none;
+    color: red;
+}
