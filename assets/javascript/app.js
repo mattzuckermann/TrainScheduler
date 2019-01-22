@@ -1,18 +1,3 @@
-// var config = {
-//     apiKey: "AIzaSyC89VjAiS9e9i1AVqNW20UrRDJfuxIfcDA",
-//     authDomain: "mz-train-scheduler.firebaseapp.com",
-//     databaseURL: "https://mz-train-scheduler.firebaseio.com",
-//     projectId: "mz-train-scheduler",
-//     storageBucket: "mz-train-scheduler.appspot.com",
-//     messagingSenderId: "863857602498"
-// };
-
-// firebase.initializeApp(config);
-
-//https://mz-train-scheduler.firebaseio.com/
-
-
-
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyAIfRrL-7coY9zDaYSVgtkj2sueapTayNw",
@@ -21,16 +6,14 @@ var config = {
     projectId: "mz-train-scheduler2",
     storageBucket: "mz-train-scheduler2.appspot.com",
     messagingSenderId: "89347452395"
-  };
-  firebase.initializeApp(config);
+};
+firebase.initializeApp(config);
 
+//=============
+//FIREBASE LINK
+//=============
 //https://mz-train-scheduler2.firebaseio.com
 
-
-
-// =========
-// VARIABLES
-// =========
 
 var database = firebase.database();
 
@@ -50,6 +33,8 @@ $("#submitButton").on("click", function () {
     var timeFormat = "HH:mm";
     var firstTimeConverter = moment(time, timeFormat);
     var currentTime = moment();
+
+    var firstTimeConverterString = firstTimeConverter.toString();
 
     var diffTime = currentTime.diff(moment(firstTimeConverter), "minutes");
     console.log("DIFFERENCE IN TIME: " + diffTime);
@@ -77,11 +62,9 @@ $("#submitButton").on("click", function () {
             trainName: name,
             trainDestination: destination,
             trainFrequency: frequency,
-            trainFirstTime: firstTimeConverter
-            // trainNextArrival: nextArrivalFormatted,
-            // trainMinutesAway: minutesTillTrain
+            trainFirstTime: firstTimeConverterString,
+            currentTime: currentTime
         });
-        // $("#emptyErrorDiv").text("");
     }
     //RETURN TEXT FORM BOXES TO PLACEHOLDER TEXT
     $("#inputName").val("");
@@ -90,7 +73,10 @@ $("#submitButton").on("click", function () {
     $("#inputFrequency").val("");
 });
 
+
 database.ref().on("child_added", function (childSnapshot) {
+
+    var currentTime = moment();
 
     var trainName = childSnapshot.val().trainName;
     var trainDestination = childSnapshot.val().trainDestination;
@@ -98,16 +84,12 @@ database.ref().on("child_added", function (childSnapshot) {
 
     var trainFirstTime = childSnapshot.val().trainFirstTime;
 
-    // var trainNextArrival = childSnapshot.val().trainNextArrival;
-    // var trainMinutesAway = childSnapshot.val().trainMinutesAway;
-
-
     var diffTime = currentTime.diff(moment(trainFirstTime), "minutes");
     var remainder = diffTime % trainFrequency;
     var minutesTillTrain = trainFrequency - remainder;
     var nextArrival = currentTime.add(minutesTillTrain, "minutes");
     var nextArrivalFormatted = moment(nextArrival).format("HH:mm");
-    
+
     var trainNextArrival = nextArrivalFormatted;
     var trainMinutesAway = minutesTillTrain;
 
@@ -128,5 +110,39 @@ database.ref().on("child_added", function (childSnapshot) {
     }
 });
 
+setInterval(function () {
+    database.ref().on("value", function (childSnapshot) {
+        var currentTime = moment();
 
-//The database must be constantly listening to the change in time as well as the change in time remaining until train arrives
+        var trainName = childSnapshot.val().trainName;
+        var trainDestination = childSnapshot.val().trainDestination;
+        var trainFrequency = childSnapshot.val().trainFrequency;
+
+        var trainFirstTime = childSnapshot.val().trainFirstTime;
+
+        var diffTime = currentTime.diff(moment(trainFirstTime), "minutes");
+        var remainder = diffTime % trainFrequency;
+        var minutesTillTrain = trainFrequency - remainder;
+        var nextArrival = currentTime.add(minutesTillTrain, "minutes");
+        var nextArrivalFormatted = moment(nextArrival).format("HH:mm");
+
+        var trainNextArrival = nextArrivalFormatted;
+        var trainMinutesAway = minutesTillTrain;
+
+        //ADD ROW TO TABLE 
+        var tableBody = $("tbody");
+        var tableRow = $("<tr>").append(
+            $("<td>").text(trainName),
+            $("<td>").text(trainDestination),
+            $("<td>").text(trainFrequency),
+            $("<td>").text(trainNextArrival),
+            $("<td>").text(trainMinutesAway),
+        );
+        tableBody.append(tableRow);
+
+        // HANDLE THE ERRORS
+        function errorsHandled(errorObject) {
+            console.log("Errors handled: " + errorObject.code);
+        }
+    });
+}, 600000);
