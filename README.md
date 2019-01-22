@@ -21,3 +21,9 @@ Simply fill out the forms for "Train Name," "Destination," "First Train Time," a
 <img src="https://media.giphy.com/media/2yzEP8yRUe8sQO80GE/giphy.gif" alt="Gif Demonstration of App" width=100%>
 
 ---
+
+### Deployment
+
+My deployed project can be seen on Heroku at the link [here](https://mczuckermann.github.io/Train-Scheduler_Moment.js-Firebase/).
+
+---
