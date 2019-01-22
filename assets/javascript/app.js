@@ -62,8 +62,7 @@ $("#submitButton").on("click", function () {
             trainName: name,
             trainDestination: destination,
             trainFrequency: frequency,
-            trainFirstTime: firstTimeConverterString,
-            currentTime: currentTime
+            trainFirstTime: firstTimeConverterString
         });
     }
     //RETURN TEXT FORM BOXES TO PLACEHOLDER TEXT
