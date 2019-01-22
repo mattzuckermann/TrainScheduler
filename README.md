@@ -12,7 +12,7 @@ This app provides several forms to input data of that which would resemble a dep
 
 ### Text Walk Through:
 
-
+Simply fill out the forms for "Train Name," "Destination," "First Train Time," and "Frequency." Once this is finished, hit the submit button to run the function that pushes the form data to the database.
 
 ---
 
