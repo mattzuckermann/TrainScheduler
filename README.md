@@ -18,6 +18,6 @@ Simply fill out the forms for "Train Name," "Destination," "First Train Time," a
 
 ### GIF Demonstration of App:
 
-![](https://media.giphy.com/media/2yzEP8yRUe8sQO80GE/giphy.gif)
+![GIF Demonstration of App](https://media.giphy.com/media/2yzEP8yRUe8sQO80GE/giphy.gif) | width=500
 
 ---
